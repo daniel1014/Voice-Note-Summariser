@@ -1,0 +1,83 @@
+[
+    {
+      "title": "Project Update Idea",
+      "content": "Hey, just had a thought about the Q3 project roadmap. I think we should move the user testing phase for the new dashboard feature up to August instead of September. I feel like getting that feedback earlier could really help us iterate before the final push. Let me know what you think when you get a chance. Cheers."
+    },
+    {
+      "title": "Grocery List",
+      "content": "Right, quick reminder for the shopping later: we need milk, definitely need eggs, some of that sourdough bread from the bakery, avocados, and maybe some chicken for dinner tonight. Oh, and don't forget coffee beans! We're almost out. Thanks."
+    },
+    {
+      "title": "Weekend Plans?",
+      "content": "Hey! Just wondering what you're up to this weekend. Sarah and I were thinking of maybe heading to the coast on Saturday if the weather holds up. Fancy joining? Should be a chill one. Give me a shout."
+    },
+    {
+      "title": "Feedback on the design",
+      "content": "Hi, just took a look at the latest mockups for the landing page. It's looking really clean, I like the new color palette. The only thing is the main call-to-action button... it feels a bit lost. Maybe we could try a bolder color or increase the size slightly? Just a thought."
+    },
+    {
+      "title": "Running late",
+      "content": "Hey, so sorry, the train is absolutely packed and we're stuck just outside the station. I'm probably going to be about 15, maybe 20 minutes late for our 10am. Can you let the team know? So sorry again."
+    },
+    {
+      "title": "Quick question about API",
+      "content": "Hey, quick one for you. I'm looking at the new user endpoint in the API docs. Is the 'lastSeen' field supposed to be a timestamp or an ISO 8601 string? The example shows a timestamp but the description is a bit vague. No rush on this."
+    },
+    {
+      "title": "Dinner reservation",
+      "content": "Just a heads-up, I've booked that Italian place for Friday night. Table for four at 8 PM under my name. Let me know if that still works for everyone."
+    },
+    {
+      "title": "Brainstorming idea",
+      "content": "Okay, bit of a random idea for the marketing campaign. What if we did a series of short, funny videos for social media instead of the usual static ads? Something a bit more engaging. Could be low-budget, just shot on a phone. Let it marinate."
+    },
+    {
+      "title": "Forgot my charger",
+      "content": "Argh, I'm an idiot. I've left my laptop charger on my desk at home. Is there any chance you have a spare USB-C one I could borrow for the afternoon? My battery is on its last legs. Lifesaver if you do."
+    },
+    {
+      "title": "Podcast recommendation",
+      "content": "You have to check out this podcast I just finished, it's called 'The Data Detective'. It's all about how data is used and misused in the media. Super interesting stuff, I think you'd really get into it."
+    },
+    {
+      "title": "Client meeting follow-up",
+      "content": "Hey, just got out of the meeting with the client. It went really well, they're super happy with the progress. They did mention they want to see the preliminary performance metrics by end of day Thursday. I'll send a proper email summary in a bit."
+    },
+    {
+      "title": "Is this a bug?",
+      "content": "Hey, I think I might have found a bug on the staging server. When I try to update my profile picture, I get a 500 error, but only on Firefox. It seems to work fine on Chrome. Can you take a look when you have a sec?"
+    },
+    {
+      "title": "Birthday gift idea",
+      "content": "Okay, for Mark's birthday... I was thinking we could all chip in and get him that fancy coffee grinder he's been talking about for ages. What do you reckon? I can set up a collection if everyone's on board."
+    },
+    {
+      "title": "Team lunch",
+      "content": "Just a reminder that we've got the team lunch tomorrow at that new Thai place at 1pm. Don't forget!"
+    },
+    {
+      "title": "Feature refinement",
+      "content": "Thinking about the search feature... right now it just matches keywords. What if we added some basic filtering options? Like, filter by date or by user. It would make it so much more powerful. Probably a V2 thing, but wanted to plant the seed."
+    },
+    {
+      "title": "Vet appointment",
+      "content": "Hey, just to let you know I'm going to be offline for about an hour this afternoon, from 2:30. Just have to take the cat to the vet for his annual check-up. Should be back online by 3:30."
+    },
+    {
+      "title": "Database migration plan",
+      "content": "Right, I've been looking at the database migration. I think we should do it over the weekend to minimize downtime. Probably Saturday night. I'll write up a full plan and send it over for you to review."
+    },
+    {
+      "title": "Holiday plans",
+      "content": "Just booked flights for that trip in October! We're flying out on the 5th and coming back on the 15th. So excited! Now we just need to sort out accommodation."
+    },
+    {
+      "title": "Quick favour",
+      "content": "Hey, are you in the office today? If so, would you mind grabbing that book off my desk? The one with the blue cover. I need a chapter from it for this report I'm writing. No worries if not!"
+    },
+    {
+      "title": "Deployment check",
+      "content": "The deployment to production just finished. Everything looks stable so far, but can you just do a quick sanity check on the new checkout flow when you get a moment? Just to be safe. Thanks."
+    }
+  ]
+  
