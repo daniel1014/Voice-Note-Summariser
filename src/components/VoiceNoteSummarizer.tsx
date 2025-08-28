@@ -7,6 +7,22 @@ import { User, Transcript, Summary } from '@/types';
 import { AVAILABLE_MODELS, DEFAULT_PROMPT, DEFAULT_TEMPERATURE } from '@/lib/constants';
 import { useToast } from '@/components/ui/use-toast';
 
+type SummarizeResult = {
+  model: string;
+  status: 'ok' | 'error';
+  persisted: boolean;
+  summary?: {
+    id: string;
+    content: string;
+    modelUsed: string;
+    createdAt: string | Date;
+  };
+  error?: {
+    code: string;
+    message: string;
+  };
+};
+
 interface VoiceNoteSummarizerProps {
   user: User;
   onLogout: () => void;
@@ -131,8 +147,9 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
           }
           // Show toast if partial errors (e.g., rate limit) even when success is true
           if (data?.partial && Array.isArray(data?.results)) {
-            const rateLimitErrors = (data.results as any[]).filter(
-              r => r?.status === 'error' && String(r?.error?.code || '').startsWith('RATE_LIMIT')
+            const results = data.results as SummarizeResult[];
+            const rateLimitErrors = results.filter(
+              (r) => r.status === 'error' && r.error?.code?.startsWith('RATE_LIMIT')
             );
             if (rateLimitErrors.length > 0) {
               const msg = rateLimitErrors[0]?.error?.message || 'Rate limit exceeded. Please try again later.';
@@ -251,8 +268,9 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
         await loadSummaries(transcriptId, selectedModels);
       }
       if (data?.partial && Array.isArray(data?.results)) {
-        const rateLimitErrors = (data.results as any[]).filter(
-          r => r?.status === 'error' && String(r?.error?.code || '').startsWith('RATE_LIMIT')
+        const results = data.results as SummarizeResult[];
+        const rateLimitErrors = results.filter(
+          (r) => r.status === 'error' && r.error?.code?.startsWith('RATE_LIMIT')
         );
         if (rateLimitErrors.length > 0) {
           const msg = rateLimitErrors[0]?.error?.message || 'Rate limit exceeded. Please try again later.';
