@@ -13,6 +13,7 @@
     "vercel-build": "prisma generate && prisma migrate deploy && next build --turbopack"
   },
   "dependencies": {
+    "@elevenlabs/elevenlabs-js": "^2.12.2",
     "@prisma/client": "^6.15.0",
     "bcryptjs": "^3.0.2",
     "next": "15.5.2",
