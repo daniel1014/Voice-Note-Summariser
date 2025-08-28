@@ -10,7 +10,6 @@ A full-stack AI-powered application that enables users to generate and compare s
 ## Deployment
 
 - **Platform**: Vercel
-- **Environment**: .env configuration
 - **Deployed URL**: https://voice-note-summariser.vercel.app/
 
 ## Tech Stack
@@ -19,8 +18,7 @@ A full-stack AI-powered application that enables users to generate and compare s
 - **Framework**: Next.js 15.5.2 (App Router)
 - **React**: 19.1.0
 - **Language**: TypeScript 5+
-- **Styling**: Tailwind CSS v4
-- **Build Tool**: Turbopack
+- **Styling**: Tailwind CSS v4 + Shadcn UI
 
 ### Backend
 - **API**: Next.js API Routes
