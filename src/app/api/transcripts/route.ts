@@ -1,6 +1,11 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
+/**
+ * This route is used by VoiceNoteSummarizer.tsx to fetch transcripts from the database.
+ */
+export const runtime = 'nodejs';
+
 export async function GET() {
   try {
     const transcripts = await prisma.transcript.findMany({
