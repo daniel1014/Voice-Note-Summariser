@@ -1,83 +1,82 @@
 [
-    {
-      "title": "Project Update Idea",
-      "content": "Hey, just had a thought about the Q3 project roadmap. I think we should move the user testing phase for the new dashboard feature up to August instead of September. I feel like getting that feedback earlier could really help us iterate before the final push. Let me know what you think when you get a chance. Cheers."
-    },
-    {
-      "title": "Grocery List",
-      "content": "Right, quick reminder for the shopping later: we need milk, definitely need eggs, some of that sourdough bread from the bakery, avocados, and maybe some chicken for dinner tonight. Oh, and don't forget coffee beans! We're almost out. Thanks."
-    },
-    {
-      "title": "Weekend Plans?",
-      "content": "Hey! Just wondering what you're up to this weekend. Sarah and I were thinking of maybe heading to the coast on Saturday if the weather holds up. Fancy joining? Should be a chill one. Give me a shout."
-    },
-    {
-      "title": "Feedback on the design",
-      "content": "Hi, just took a look at the latest mockups for the landing page. It's looking really clean, I like the new color palette. The only thing is the main call-to-action button... it feels a bit lost. Maybe we could try a bolder color or increase the size slightly? Just a thought."
-    },
-    {
-      "title": "Running late",
-      "content": "Hey, so sorry, the train is absolutely packed and we're stuck just outside the station. I'm probably going to be about 15, maybe 20 minutes late for our 10am. Can you let the team know? So sorry again."
-    },
-    {
-      "title": "Quick question about API",
-      "content": "Hey, quick one for you. I'm looking at the new user endpoint in the API docs. Is the 'lastSeen' field supposed to be a timestamp or an ISO 8601 string? The example shows a timestamp but the description is a bit vague. No rush on this."
-    },
-    {
-      "title": "Dinner reservation",
-      "content": "Just a heads-up, I've booked that Italian place for Friday night. Table for four at 8 PM under my name. Let me know if that still works for everyone."
-    },
-    {
-      "title": "Brainstorming idea",
-      "content": "Okay, bit of a random idea for the marketing campaign. What if we did a series of short, funny videos for social media instead of the usual static ads? Something a bit more engaging. Could be low-budget, just shot on a phone. Let it marinate."
-    },
-    {
-      "title": "Forgot my charger",
-      "content": "Argh, I'm an idiot. I've left my laptop charger on my desk at home. Is there any chance you have a spare USB-C one I could borrow for the afternoon? My battery is on its last legs. Lifesaver if you do."
-    },
-    {
-      "title": "Podcast recommendation",
-      "content": "You have to check out this podcast I just finished, it's called 'The Data Detective'. It's all about how data is used and misused in the media. Super interesting stuff, I think you'd really get into it."
-    },
-    {
-      "title": "Client meeting follow-up",
-      "content": "Hey, just got out of the meeting with the client. It went really well, they're super happy with the progress. They did mention they want to see the preliminary performance metrics by end of day Thursday. I'll send a proper email summary in a bit."
-    },
-    {
-      "title": "Is this a bug?",
-      "content": "Hey, I think I might have found a bug on the staging server. When I try to update my profile picture, I get a 500 error, but only on Firefox. It seems to work fine on Chrome. Can you take a look when you have a sec?"
-    },
-    {
-      "title": "Birthday gift idea",
-      "content": "Okay, for Mark's birthday... I was thinking we could all chip in and get him that fancy coffee grinder he's been talking about for ages. What do you reckon? I can set up a collection if everyone's on board."
-    },
-    {
-      "title": "Team lunch",
-      "content": "Just a reminder that we've got the team lunch tomorrow at that new Thai place at 1pm. Don't forget!"
-    },
-    {
-      "title": "Feature refinement",
-      "content": "Thinking about the search feature... right now it just matches keywords. What if we added some basic filtering options? Like, filter by date or by user. It would make it so much more powerful. Probably a V2 thing, but wanted to plant the seed."
-    },
-    {
-      "title": "Vet appointment",
-      "content": "Hey, just to let you know I'm going to be offline for about an hour this afternoon, from 2:30. Just have to take the cat to the vet for his annual check-up. Should be back online by 3:30."
-    },
-    {
-      "title": "Database migration plan",
-      "content": "Right, I've been looking at the database migration. I think we should do it over the weekend to minimize downtime. Probably Saturday night. I'll write up a full plan and send it over for you to review."
-    },
-    {
-      "title": "Holiday plans",
-      "content": "Just booked flights for that trip in October! We're flying out on the 5th and coming back on the 15th. So excited! Now we just need to sort out accommodation."
-    },
-    {
-      "title": "Quick favour",
-      "content": "Hey, are you in the office today? If so, would you mind grabbing that book off my desk? The one with the blue cover. I need a chapter from it for this report I'm writing. No worries if not!"
-    },
-    {
-      "title": "Deployment check",
-      "content": "The deployment to production just finished. Everything looks stable so far, but can you just do a quick sanity check on the new checkout flow when you get a moment? Just to be safe. Thanks."
-    }
-  ]
-  
+  {
+    "title": "Project Update Idea",
+    "content": "Hey, just had a thought about the Q3 project roadmap while I was grabbing coffee. I've been looking at the dependencies and the dev timeline, and I think we should seriously consider moving the user testing phase for the new dashboard feature up to August instead of keeping it in September. My main reasoning here is that if we get that crucial user feedback a few weeks earlier, it gives the engineering team a much more comfortable buffer to iterate on any major findings before the final code freeze. The last thing we want is to be scrambling to implement significant changes right before the big push. Let me know what you think when you get a chance. Cheers."
+  },
+  {
+    "title": "Grocery List",
+    "content": "Right, just a quick reminder for the big shop later this afternoon. I've made a list so we don't forget anything crucial. We absolutely need milk—let's get two pints this time—and we're completely out of eggs, so a dozen of those please. Also, can you swing by the good bakery and get a loaf of that seeded sourdough bread? For dinner, I was thinking chicken, so grab a pack of chicken breasts. And most importantly, do not forget the coffee beans; we are down to the last few and I can't function without my morning brew. Oh, and avocados, if they look ripe. Thanks a million!"
+  },
+  {
+    "title": "Weekend Plans?",
+    "content": "Hey! Just wondering what you're up to this weekend. Sarah and I were thinking of maybe heading to the coast on Saturday if the weather holds up, since it's supposed to be sunny for once. We'd probably just pack some sandwiches, find a nice spot on the beach, and relax. Nothing too strenuous. We were thinking of leaving around 10 AM and coming back in the evening. Fancy joining us? It should be a really chill day and a good break from the city. Let me know if you're free and interested, would be great to catch up properly. Give me a shout."
+  },
+  {
+    "title": "Feedback on the design",
+    "content": "Hi, just took a look at the latest mockups for the landing page in Figma. It's looking really clean, and I'm a big fan of the new, more modern color palette. The typography is also a huge improvement. The only piece of feedback I have is about the main call-to-action button. It feels a bit lost against the background hero image, especially on smaller screens. Maybe we could experiment with a bolder, more contrasting color, or perhaps just increase the size and padding slightly to give it more visual weight? Just a thought, but I think it could really help with conversion. Great work otherwise!"
+  },
+  {
+    "title": "Running late",
+    "content": "Hey, so sorry, but I'm running quite late for our 10am meeting. The train is absolutely packed this morning and we've been stuck between stations for the last ten minutes with no movement. The driver just announced there's a signal failure up ahead. At this rate, I'm probably going to be about 15, maybe even 20 minutes late. Could you please let the team know and see if they can start without me? I can catch up on the minutes later. I'll message again as soon as I'm moving and have a better ETA. So sorry again for the delay."
+  },
+  {
+    "title": "Quick question about API",
+    "content": "Hey, quick one for you when you have a spare moment. I'm integrating the new user endpoint and I'm looking at the API documentation. I'm a bit confused about the 'lastSeen' field in the user object. Is it supposed to be a Unix timestamp in seconds, or a full ISO 8601 formatted string? The example in the docs shows a timestamp, but the field description just says 'datetime', which is a bit vague. I just want to make sure I'm sending the data in the correct format on my end to avoid any issues down the line. No major rush on this. Thanks!"
+  },
+  {
+    "title": "Dinner reservation",
+    "content": "Just a heads-up, I've gone ahead and booked that Italian place we were talking about for Friday night. The reservation is for a table for four at 8 PM, and it's under my name. I had to put down a card to hold the table, so please let me know as soon as possible if that time no longer works for everyone. I think I can cancel without a fee up to 24 hours beforehand. I'm really looking forward to it, I've heard their carbonara is incredible. Let me know if there are any issues, otherwise, I'll see you all on Friday at 8!"
+  },
+  {
+    "title": "Brainstorming idea",
+    "content": "Okay, bit of a random idea for the upcoming Q4 marketing campaign. I was thinking, what if we did something different from our usual static ads? What if we produced a series of short, funny, behind-the-scenes style videos for social media platforms like TikTok and Instagram Reels? Something a bit more authentic and engaging that shows the human side of our brand. It could be really low-budget, just shot on a phone to keep that raw feel. I think it could really resonate with a younger audience and help us stand out. Just an initial thought to let marinate, let me know what you think."
+  },
+  {
+    "title": "Forgot my charger",
+    "content": "Argh, I'm such an idiot. I was in a rush this morning and I've left my laptop charger sitting on my desk at home. My battery is already at 30% and I have back-to-back meetings this afternoon. Is there any chance at all that you have a spare USB-C one I could borrow for a few hours? It would be an absolute lifesaver. I can come over to your desk to grab it whenever is convenient for you. If not, no worries, I'll have to make a mad dash to the electronics store at lunch. Let me know. Thanks!"
+  },
+  {
+    "title": "Podcast recommendation",
+    "content": "You absolutely have to check out this podcast I just finished. It's called 'The Data Detective' and it's hosted by this economist who is brilliant at breaking down complex topics. It's all about how data and statistics are used and, more often, misused in the media and in public discourse. It's super interesting and has completely changed the way I look at headlines and news articles. Each episode tackles a different topic, from crime rates to health scares. I think you'd really get into it given your work. You can find it on Spotify or wherever you get your podcasts."
+  },
+  {
+    "title": "Client meeting follow-up",
+    "content": "Hey, just got out of the meeting with the client, and it went really well! They're super happy with the progress on the alpha build and they loved the demo of the new reporting feature. They seem really bought into our vision, which is great. The main action point from our side is that they want to see the preliminary performance metrics by the end of the day on Thursday. They're particularly interested in page load times and API response latency. I'll write up a proper email summary with all the details and action items in a bit and send it over to the team."
+  },
+  {
+    "title": "Is this a bug?",
+    "content": "Hey, I think I might have found a reproducible bug on the staging server. When I try to update my profile picture, I consistently get a 500 internal server error, but it only seems to happen on Firefox. I've tried on the latest version of Firefox on both Mac and Windows. It works perfectly fine on Chrome and Safari, the upload completes and the image updates. It seems to be browser-specific. Could you take a look at the server logs when you have a sec? There might be something in there that points to the issue. Let me know if you need more info."
+  },
+  {
+    "title": "Birthday gift idea",
+    "content": "Okay, so Mark's birthday is in two weeks and we still haven't figured out a gift from the team. I was thinking, instead of getting him a bunch of small, random things, we could all chip in for one big present. He's been talking about that fancy coffee grinder from that specialty store for ages. It's a bit pricey for one person, but if we all contribute, it's totally doable. What do you reckon? I'm happy to set up a collection pot online to make it easy for everyone to chip in. Let me know if you're on board with the idea."
+  },
+  {
+    "title": "Team lunch",
+    "content": "Hey everyone, just a quick and friendly reminder that we've got the team lunch scheduled for tomorrow. We're heading to that new Thai place on the corner, the one that just opened up last month. The reservation is for 1 PM. I've already pre-ordered for a few people who sent me their choices. If you haven't, no worries, we can order when we get there. Please try to be on time so we can all be seated together. Looking forward to catching up with everyone outside of the office for a bit. See you all tomorrow at one!"
+  },
+  {
+    "title": "Feature refinement",
+    "content": "I've been thinking about the search feature in the app. Right now, it just does a basic keyword match on the title, which is fine, but it could be so much more powerful for our users. What if we added some basic filtering options to the search results page? For example, allowing users to filter by a date range, or by the user who created the item. It would make finding specific things so much faster. I know the roadmap is packed, so this is probably a V2 thing, but I wanted to plant the seed now. I can even mock up a quick design."
+  },
+  {
+    "title": "Vet appointment",
+    "content": "Hey team, just a quick heads-up to let you know that I'm going to be offline for about an hour this afternoon, starting from around 2:30 PM. I have to take my cat to the vet for his annual check-up and vaccinations. It's just a routine appointment, so nothing to worry about. I should be back at my desk and online by 3:30 PM at the latest. I'll have my phone on me, so if anything urgent comes up, feel free to send me a text message and I'll get back to you as soon as I can. Thanks for understanding."
+  },
+  {
+    "title": "Database migration plan",
+    "content": "Right, I've spent the morning looking at the plan for the main database migration. To minimize downtime and impact on our international users, I think our best bet is to schedule the migration over the weekend. I'm proposing we aim for Saturday night, starting around 10 PM GMT, as that seems to be our quietest period. I'll write up a full, step-by-step plan that includes pre-migration checks, the migration script itself, post-migration validation, and a rollback procedure in case anything goes wrong. I'll send it over for you and the rest of the team to review by the end of today."
+  },
+  {
+    "title": "Holiday plans",
+    "content": "Amazing news! I've just booked the flights for our trip in October! I managed to get a really good deal, so we're all confirmed. We're flying out on the morning of the 5th and flying back on the evening of the 15th, so we get ten full days there. I'm so excited! Now the fun part begins: planning what we're going to do. The next step is to sort out accommodation. I've been looking at a few different options, from hotels to rental apartments. I'll send you some links later so you can take a look and let me know what you prefer."
+  },
+  {
+    "title": "Quick favour",
+    "content": "Hey, quick question, are you in the office today by any chance? If you are, would you be able to do me a massive favour? I left a book on my desk yesterday, it's the one with the solid blue cover, I think the title is 'Data-Driven Design'. I really need a specific chapter from it for this report I'm trying to finish today. If you have a spare moment, would you mind taking a photo of the table of contents and the chapter on user analytics and sending them over to me? No worries at all if you're not in or don't have time!"
+  },
+  {
+    "title": "Deployment check",
+    "content": "Hey, the deployment of version 2.5 to the production environment just finished successfully. All the automated checks and health monitors are green, so everything looks stable from my end so far. However, since this release included significant changes to the checkout flow, I'd really appreciate it if you could do a quick manual sanity check when you get a moment. Just try adding an item to the cart and going through the payment process. It shouldn't take more than a few minutes, but it's always good to have a second pair of eyes on it just to be safe. Thanks a lot."
+  }
+]
