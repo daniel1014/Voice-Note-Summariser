@@ -5,6 +5,7 @@ import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import { User, Transcript, Summary } from '@/types';
 import { AVAILABLE_MODELS, DEFAULT_PROMPT, DEFAULT_TEMPERATURE } from '@/lib/constants';
+import { useToast } from '@/components/ui/use-toast';
 
 interface VoiceNoteSummarizerProps {
   user: User;
@@ -12,6 +13,7 @@ interface VoiceNoteSummarizerProps {
 }
 
 export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummarizerProps) {
+  const { toast } = useToast();
   const [transcripts, setTranscripts] = useState<Transcript[]>([]);
   const [selectedTranscriptIds, setSelectedTranscriptIds] = useState<string[]>([]);
   const [summariesByTranscript, setSummariesByTranscript] = useState<Record<string, Summary[]>>({});
@@ -127,6 +129,20 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
             // Refresh summaries for this transcript (only for requested models)
             await loadSummaries(transcriptId, models);
           }
+          // Show toast if partial errors (e.g., rate limit) even when success is true
+          if (data?.partial && Array.isArray(data?.results)) {
+            const rateLimitErrors = (data.results as any[]).filter(
+              r => r?.status === 'error' && String(r?.error?.code || '').startsWith('RATE_LIMIT')
+            );
+            if (rateLimitErrors.length > 0) {
+              const msg = rateLimitErrors[0]?.error?.message || 'Rate limit exceeded. Please try again later.';
+              toast({
+                title: 'Rate limit reached',
+                description: msg,
+                variant: 'destructive',
+              });
+            }
+          }
         } catch (error) {
           console.error(`Error processing transcript ${transcriptId}:`, error);
         }
@@ -233,6 +249,19 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
       if (data.success) {
         // Refresh summaries for this transcript (only for requested models)
         await loadSummaries(transcriptId, selectedModels);
+      }
+      if (data?.partial && Array.isArray(data?.results)) {
+        const rateLimitErrors = (data.results as any[]).filter(
+          r => r?.status === 'error' && String(r?.error?.code || '').startsWith('RATE_LIMIT')
+        );
+        if (rateLimitErrors.length > 0) {
+          const msg = rateLimitErrors[0]?.error?.message || 'Rate limit exceeded. Please try again later.';
+          toast({
+            title: 'Rate limit reached',
+            description: msg,
+            variant: 'destructive',
+          });
+        }
       }
     } catch (error) {
       console.error(`Error processing transcript ${transcriptId}:`, error);
