@@ -5,7 +5,13 @@ A full-stack AI-powered application that enables users to generate and compare s
 
 **Version**: 3.0  
 **Implementation Date**: August 28, 2025  
-**Development Time**: 1-1.5 days
+**Development Time**: 5-7 hours (including deployment and testing)
+
+## Deployment
+
+- **Platform**: Vercel
+- **Environment**: .env configuration
+- **Deployed URL**: https://voice-note-summariser.vercel.app/
 
 ## Tech Stack
 
@@ -47,10 +53,6 @@ A full-stack AI-powered application that enables users to generate and compare s
 - **Comparison View**: Compare summaries from different models side by side
 - **Responsive Design**: Works on desktop and mobile devices
 - **Text-to-Speech**: high-quality speech synthesis for summary playback
-
-### Deployment
-- **Platform**: Vercel-ready
-- **Environment**: .env configuration
 
 ## Project Structure
 
@@ -132,9 +134,42 @@ public/
 7. **Access the application**:
    - Open http://localhost:3000 in your browser
 
-
 ## Future Updates of transcripts
 
 When you modify voice_transcript.json, you'll need to:
 1. Re-seed the database: npm run seed
 2. Restart the dev server: npm run dev
+
+
+## Screenshots
+
+Main page:
+
+![Main page](./public/screenshots/main-page.png)
+![Main page 2](./public/screenshots/main-page-2.png)
+
+Database:Prisma Studio (cloud):
+
+![Prisma Studio](./public/screenshots/prisma-postgre-cloud-1.png)
+![Prisma Studio 2](./public/screenshots/prisma-postgre-cloud-2.png)
+
+Database: Prisma Studio (local):
+![Prisma Studio](./public/screenshots/prisma-postgre-local-1.png)
+![Prisma Studio 2](./public/screenshots/prisma-postgre-local-2.png)
+
+## Any AI assistance I used and how
+
+I used AI tools to support and accelerate my work, while ensuring that I remained in full control of the design and implementation decisions:
+
+- Gemini 2.5 Pro — helped me draft a technical PRD (Product Requirements Document) to structure my approach to the project.
+- Claude Code (Sonnet 4.0) — assisted with implementation by providing suggestions and code snippets, which I reviewed and adapted.
+- Cursor with GPT-5 — supported debugging and testing, particularly when configuring the database (Prisma) for both local and cloud environments, and when troubleshooting the TTS functionality.
+
+## Future Enhancements
+
+### Suggested Improvements
+1. **Authentication**: JWT tokens, session management
+2. **Security**: Password hashing, CSRF protection
+3. **Performance**: Response caching, request debouncing
+4. **UI/UX**: Accessibility improvements, integrate with Shadcn UI, keyboard navigation
+5. **Features**: Summary export, history tracking

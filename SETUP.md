@@ -52,9 +52,10 @@
 ## Default Models
 
 The application comes configured with free OpenRouter models:
-- Meta Llama 3.1 8B Instruct
-- Microsoft Phi 3 Mini 128K Instruct
-- Google Gemma 2 9B IT
+- Meta Llama 4 Scout (Free)
+- OpenAI GPT OSS 20B (Free)
+- Z-AI GLM 4.5 Air (Free)
+- MoonshotAI: Kimi K2 (Free)
 
 ## API Endpoints
 
@@ -70,3 +71,9 @@ The application comes configured with free OpenRouter models:
 - **Database**: PostgreSQL (Prisma local dev server)
 - **AI**: OpenRouter API integration
 - **Deployment**: Vercel-ready
+
+## Future Updates of transcripts
+
+When you modify voice_transcript.json, you'll need to:
+1. Re-seed the database: npm run seed
+2. Restart the dev server: npm run dev
