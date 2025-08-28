@@ -1,4 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
+/**
+ * High-level: Generate and persist summaries for a single transcript.
+ * - HTTP semantics: POST only (side effects). Accepts 1–3 models via `models`.
+ * - Behavior: Calls OpenRouter per model with concurrency limiting, persists each result,
+ *   and returns per-model statuses. Partial failures are surfaced via `partial`.
+ * - Why separate from GET /api/summaries: keeps read (idempotent) and write (non-idempotent)
+ *   concerns clearly isolated; enables caching and safer retries for reads.
+ */
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import pLimit from 'p-limit';

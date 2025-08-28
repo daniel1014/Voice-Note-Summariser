@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import LeftPanel from './LeftPanel';
 import RightPanel from './RightPanel';
 import { User, Transcript, Summary } from '@/types';
+import { AVAILABLE_MODELS, DEFAULT_PROMPT, DEFAULT_TEMPERATURE } from '@/lib/constants';
 
 interface VoiceNoteSummarizerProps {
   user: User;
@@ -12,25 +13,25 @@ interface VoiceNoteSummarizerProps {
 
 export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummarizerProps) {
   const [transcripts, setTranscripts] = useState<Transcript[]>([]);
-  const [selectedTranscript, setSelectedTranscript] = useState<Transcript | null>(null);
-  const [summaries, setSummaries] = useState<Summary[]>([]);
+  const [selectedTranscriptIds, setSelectedTranscriptIds] = useState<string[]>([]);
+  const [summariesByTranscript, setSummariesByTranscript] = useState<Record<string, Summary[]>>({});
+  const [loadingModelsByTranscript, setLoadingModelsByTranscript] = useState<Record<string, string[]>>({});
   const [isLoading, setIsLoading] = useState(true);
-  const [batchSummaries, setBatchSummaries] = useState<Summary[]>([]);
+  const [isGenerating, setIsGenerating] = useState(false);
   const [isBatchProcessing, setIsBatchProcessing] = useState(false);
+
+  // Lift up model selection state from LeftPanel
+  const [selectedModels, setSelectedModels] = useState<string[]>([AVAILABLE_MODELS[0]]);
+  const [prompt, setPrompt] = useState(DEFAULT_PROMPT);
+  const [temperature, setTemperature] = useState(DEFAULT_TEMPERATURE);
 
   // Load transcripts on component mount
   useEffect(() => {
     loadTranscripts();
   }, []);
 
-  // Load summaries when a transcript is selected
-  useEffect(() => {
-    if (selectedTranscript) {
-      loadSummaries(selectedTranscript.id);
-    } else {
-      setSummaries([]);
-    }
-  }, [selectedTranscript]);
+  // Note: Removed automatic summary loading on selection
+  // Summaries are now only loaded when explicitly requested via generate buttons
 
   const loadTranscripts = async () => {
     try {
@@ -48,9 +49,6 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
           createdAt: new Date(t.createdAt).toISOString()
         })) || [];
         setTranscripts(transcripts);
-        if (transcripts.length > 0) {
-          setSelectedTranscript(transcripts[0]);
-        }
       }
     } catch (error) {
       console.error('Error loading transcripts:', error);
@@ -59,16 +57,33 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
     }
   };
 
-  const loadSummaries = async (transcriptId: string) => {
+  const loadSummaries = async (transcriptId: string, models?: string[]) => {
     try {
-      const response = await fetch(`/api/summaries?transcriptId=${transcriptId}`);
+      const params = new URLSearchParams({ transcriptId });
+      if (models && models.length > 0) {
+        params.set('models', models.join(','));
+      }
+      const response = await fetch(`/api/summaries?${params.toString()}`);
       if (response.ok) {
         const data = await response.json();
-        setSummaries(data.summaries || []);
+        setSummariesByTranscript(prev => ({
+          ...prev,
+          [transcriptId]: data.summaries || []
+        }));
       }
     } catch (error) {
       console.error('Error loading summaries:', error);
     }
+  };
+
+  const handleToggleTranscriptSelection = (transcriptId: string) => {
+    setSelectedTranscriptIds(prev => {
+      if (prev.includes(transcriptId)) {
+        return prev.filter(id => id !== transcriptId);
+      } else {
+        return [...prev, transcriptId];
+      }
+    });
   };
 
   const handleGenerateSummaries = async (
@@ -76,34 +91,56 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
     prompt: string,
     temperature: number
   ) => {
-    if (!selectedTranscript) return;
+    if (selectedTranscriptIds.length === 0) return;
+
+    setIsGenerating(true);
+
+    // Set loading models for selected transcripts
+    setLoadingModelsByTranscript(prev => {
+      const updated = { ...prev };
+      selectedTranscriptIds.forEach(id => {
+        updated[id] = models;
+      });
+      return updated;
+    });
 
     try {
-      const response = await fetch('/api/summarize', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          transcriptId: selectedTranscript.id,
-          models,
-          prompt,
-          temperature,
-        }),
-      });
+      // Process each selected transcript
+      for (const transcriptId of selectedTranscriptIds) {
+        try {
+          const response = await fetch('/api/summarize', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              transcriptId,
+              models,
+              prompt,
+              temperature,
+            }),
+          });
 
-      const data = await response.json();
-      
-      if (data.success) {
-        // Refresh summaries for the current transcript
-        await loadSummaries(selectedTranscript.id);
-        return data;
-      } else {
-        throw new Error(data.error || 'Failed to generate summaries');
+          const data = await response.json();
+          
+          if (data.success) {
+            // Refresh summaries for this transcript (only for requested models)
+            await loadSummaries(transcriptId, models);
+          }
+        } catch (error) {
+          console.error(`Error processing transcript ${transcriptId}:`, error);
+        }
       }
-    } catch (error) {
-      console.error('Error generating summaries:', error);
-      throw error;
+    } finally {
+      setIsGenerating(false);
+      // Clear loading states
+      setLoadingModelsByTranscript(prev => {
+        const updated = { ...prev };
+        selectedTranscriptIds.forEach(id => {
+          updated[id] = [];
+        });
+        return updated;
+      });
     }
   };
 
@@ -112,15 +149,18 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
     prompt: string,
     temperature: number
   ) => {
-    if (models.length === 0 || !transcripts.length) return;
+    if (models.length === 0 || transcripts.length === 0) return;
 
     setIsBatchProcessing(true);
-    setBatchSummaries([]);
+
+    // Set loading models for all transcripts
+    const allLoadingModels: Record<string, string[]> = {};
+    transcripts.forEach(transcript => {
+      allLoadingModels[transcript.id] = models;
+    });
+    setLoadingModelsByTranscript(allLoadingModels);
 
     try {
-      const firstModel = models[0]; // Use the first selected model for batch processing
-      const newBatchSummaries: Summary[] = [];
-
       // Process transcripts sequentially to avoid overwhelming the API
       for (const transcript of transcripts) {
         try {
@@ -131,7 +171,7 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
             },
             body: JSON.stringify({
               transcriptId: transcript.id,
-              models: [firstModel],
+              models,
               prompt,
               temperature,
             }),
@@ -139,27 +179,70 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
 
           const data = await response.json();
           
-          if (data.success && data.results?.[0]?.summary) {
-            newBatchSummaries.push({
-              ...data.results[0].summary,
-              transcriptTitle: transcript.title,
-            } as Summary);
+          if (data.success) {
+            // Refresh summaries for this transcript (only for requested models)
+            await loadSummaries(transcript.id, models);
           }
+
+          // Clear loading for this transcript
+          setLoadingModelsByTranscript(prev => ({
+            ...prev,
+            [transcript.id]: []
+          }));
         } catch (error) {
           console.error(`Error processing transcript ${transcript.title}:`, error);
+          // Clear loading for this transcript even on error
+          setLoadingModelsByTranscript(prev => ({
+            ...prev,
+            [transcript.id]: []
+          }));
         }
       }
-
-      setBatchSummaries(newBatchSummaries);
-      
-      // Refresh summaries for currently selected transcript if any
-      if (selectedTranscript) {
-        await loadSummaries(selectedTranscript.id);
-      }
-    } catch (error) {
-      console.error('Error in batch processing:', error);
     } finally {
       setIsBatchProcessing(false);
+    }
+  };
+
+  const handleGenerateSummaryForTranscript = async (transcriptId: string) => {
+    if (selectedModels.length === 0) return;
+
+    setIsGenerating(true);
+
+    // Set loading models for this specific transcript using current selected models
+    setLoadingModelsByTranscript(prev => ({
+      ...prev,
+      [transcriptId]: selectedModels
+    }));
+
+    try {
+      const response = await fetch('/api/summarize', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          transcriptId,
+          models: selectedModels,
+          prompt,
+          temperature,
+        }),
+      });
+
+      const data = await response.json();
+      
+      if (data.success) {
+        // Refresh summaries for this transcript (only for requested models)
+        await loadSummaries(transcriptId, selectedModels);
+      }
+    } catch (error) {
+      console.error(`Error processing transcript ${transcriptId}:`, error);
+    } finally {
+      setIsGenerating(false);
+      // Clear loading state
+      setLoadingModelsByTranscript(prev => ({
+        ...prev,
+        [transcriptId]: []
+      }));
     }
   };
 
@@ -176,26 +259,35 @@ export default function VoiceNoteSummarizer({ user, onLogout }: VoiceNoteSummari
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      {/* Left Panel */}
-      <div className="w-96 bg-white shadow-lg border-r border-gray-200 flex flex-col">
+      {/* Left Panel - Control Panel */}
+      <div className="w-96 flex-shrink-0">
         <LeftPanel
-          transcripts={transcripts}
-          selectedTranscript={selectedTranscript}
-          onSelectTranscript={setSelectedTranscript}
-          batchSummaries={batchSummaries}
-          isBatchProcessing={isBatchProcessing}
+          selectedTranscriptIds={selectedTranscriptIds}
+          onGenerateSummaries={handleGenerateSummaries}
           onBatchSummarizeAll={handleBatchSummarizeAll}
+          isBatchProcessing={isBatchProcessing}
+          isGenerating={isGenerating}
           user={user}
           onLogout={onLogout}
+          selectedModels={selectedModels}
+          setSelectedModels={setSelectedModels}
+          prompt={prompt}
+          setPrompt={setPrompt}
+          temperature={temperature}
+          setTemperature={setTemperature}
         />
       </div>
 
-      {/* Right Panel */}
-      <div className="flex-1 flex flex-col">
+      {/* Right Panel - Transcript Grid */}
+      <div className="flex-1">
         <RightPanel
-          selectedTranscript={selectedTranscript}
-          summaries={summaries}
-          onGenerateSummaries={handleGenerateSummaries}
+          transcripts={transcripts}
+          selectedTranscriptIds={selectedTranscriptIds}
+          onToggleTranscriptSelection={handleToggleTranscriptSelection}
+          summariesByTranscript={summariesByTranscript}
+          loadingModelsByTranscript={loadingModelsByTranscript}
+          onGenerateSummary={handleGenerateSummaryForTranscript}
+          isGenerating={isGenerating}
         />
       </div>
     </div>
